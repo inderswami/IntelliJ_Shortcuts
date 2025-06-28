@@ -381,3 +381,95 @@ public class Solution {
     }
 }
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//Square or not
+
+This mail has been sent from an external source. Do not reply to it, or open any links/attachments unless you are sure of the sender's identity.
+
+ 
+import java.util.HashSet;
+import java.util.Set;
+
+public class Solution {
+    public boolean solution(int[] X, int[] Y) {
+        int N = X.length;
+        if (N < 4) return false; // Minimum 4 points needed to form a square's perimeter
+
+        int minX = Integer.MAX_VALUE, maxX = Integer.MIN_VALUE;
+        int minY = Integer.MAX_VALUE, maxY = Integer.MIN_VALUE;
+
+        Set<String> pointSet = new HashSet<>();
+
+        // Identify bounding square and store all points in a set
+        for (int i = 0; i < N; i++) {
+            minX = Math.min(minX, X[i]);
+            maxX = Math.max(maxX, X[i]);
+            minY = Math.min(minY, Y[i]);
+            maxY = Math.max(maxY, Y[i]);
+            pointSet.add(X[i] + "," + Y[i]);
+        }
+
+        // Check if it forms a square
+        if (maxX - minX != maxY - minY) return false;
+
+        for (int i = 0; i < N; i++) {
+            int x = X[i], y = Y[i];
+
+            // Point must lie on square perimeter: either on horizontal or vertical boundary
+            boolean onVerticalEdge = (x == minX || x == maxX) && (y >= minY && y <= maxY);
+            boolean onHorizontalEdge = (y == minY || y == maxY) && (x >= minX && x <= maxX);
+
+            if (!onVerticalEdge && !onHorizontalEdge) return false;
+        }
+
+        return true;
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        System.out.println(sol.solution(new int[]{-1, 1, -1}, new int[]{2, 1, 0}));         // true
+        System.out.println(sol.solution(new int[]{-10, -10, -9}, new int[]{-10, 10, 5}));   // true
+        System.out.println(sol.solution(new int[]{-1, 1, 1, -1, 0}, new int[]{1, 1, -1, -1, 0})); // false
+        System.out.println(sol.solution(new int[]{-1, 1, -2, 2, -2, 2}, new int[]{1, -1, -1, 1, 1, -1})); // false
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//Non negative no v in a binary form
+class Solution {
+    public int solution(String S) {
+        if (S == null || S.isEmpty()) return 0;
+        
+        // Find the first '1' to ignore leading zeros
+        int firstOne = 0;
+        while (firstOne < S.length() && S.charAt(firstOne) == '0') {
+            firstOne++;
+        }
+        
+        // If all zeros, return 0
+        if (firstOne == S.length()) return 0;
+        
+        int operations = 0;
+        // For each bit after firstOne
+        for (int i = S.length() - 1; i > firstOne; i--) {
+            if (S.charAt(i) == '1') {
+                operations += 2; // 1 for the add, 1 for the carry
+            } else {
+                operations += 1; // just the shift
+            }
+        }
+        
+        // The first '1' contributes 1 operation plus all the shifts to reach it
+        operations += 1;
+        
+        return operations;
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+

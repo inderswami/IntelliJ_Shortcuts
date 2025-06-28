@@ -1,1 +1,297 @@
-Codility
+//String rotation checker
+public class StringRotationChecker {
+    
+    // Function to rotate string left by one position
+    public static String rotateLeft(String str) {
+        if (str.length() <= 1) return str;
+        return str.substring(1) + str.charAt(0);
+    }
+
+    // Main function to perform rotation and check first-last match
+    public static void main(String[] args) {
+        String input = "abac";
+        int count = 0;
+        String rotated = input;
+
+        for (int i = 0; i < input.length(); i++) {
+            // Check if first and last characters match
+            if (rotated.charAt(0) == rotated.charAt(rotated.length() - 1)) {
+                count++;
+            }
+            // Rotate string left by one character
+            rotated = rotateLeft(rotated);
+        }
+
+        System.out.println("Number of times first and last characters matched: " + count);
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//LargestOddSum
+public class LargestOddEvenSum {
+
+    public static void main(String[] args) {
+        int[] numbers = {3, 12, 7, 8, 5, 10, 21, 2};
+
+        int largestOdd = Integer.MIN_VALUE;
+        int largestEven = Integer.MIN_VALUE;
+
+        // Find largest odd and even numbers
+        for (int num : numbers) {
+            if (num % 2 == 0) {
+                if (num > largestEven) {
+                    largestEven = num;
+                }
+            } else {
+                if (num > largestOdd) {
+                    largestOdd = num;
+                }
+            }
+        }
+
+        // Handle cases where no odd or even number exists
+        if (largestOdd == Integer.MIN_VALUE) {
+            System.out.println("No odd number found.");
+        } else {
+            System.out.println("Largest Odd Number: " + largestOdd);
+        }
+
+        if (largestEven == Integer.MIN_VALUE) {
+            System.out.println("No even number found.");
+        } else {
+            System.out.println("Largest Even Number: " + largestEven);
+        }
+
+        if (largestOdd != Integer.MIN_VALUE && largestEven != Integer.MIN_VALUE) {
+            int sum = largestOdd + largestEven;
+            System.out.println("Sum of Largest Odd and Even Numbers: " + sum);
+        }
+    }
+}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//Smallest digit Sumfinder
+public class SmallestDigitSumFinder {
+
+    // Function to compute digit sum of a number
+    public static int digitSum(int num) {
+        int sum = 0;
+        while (num > 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+        return sum;
+    }
+
+    // Main function to process the logic
+    public static void main(String[] args) {
+        int n = 14;
+
+        // Step 1: Sum of digits
+        int sumOfDigits = digitSum(n);
+
+        // Step 2: Double the sum
+        int target = sumOfDigits * 2;
+
+        // Step 3: Find the smallest number with digit sum = target
+        int result = 1;
+        while (true) {
+            if (digitSum(result) == target) {
+                break;
+            }
+            result++;
+        }
+
+        // Output
+        System.out.println("Input number: " + n);
+        System.out.println("Sum of digits: " + sumOfDigits);
+        System.out.println("Target digit sum: " + target);
+        System.out.println("Smallest number with digit sum " + target + " is: " + result);
+    }
+}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//Delete words to make even
+
+public class EvenWordSentence {
+
+    public static void main(String[] args) {
+        String input = "Java is a powerful and versatile language";
+        System.out.println("Original Sentence:");
+        System.out.println(input);
+
+        String[] words = input.split("\\s+"); // Split by whitespace
+
+        if (words.length % 2 != 0) {
+            // Odd number of words: remove the last word
+            StringBuilder evenSentence = new StringBuilder();
+            for (int i = 0; i < words.length - 1; i++) {
+                evenSentence.append(words[i]).append(" ");
+            }
+            System.out.println("\nModified Sentence with Even Words:");
+            System.out.println(evenSentence.toString().trim());
+        } else {
+            // Already even
+            System.out.println("\nSentence already has even number of words:");
+            System.out.println(input);
+        }
+    }
+}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//Largest sum of 2digit in which first and last digit are same 
+
+public class LargestDigitSumSameEnds {
+
+    // Function to calculate digit sum
+    public static int digitSum(int num) {
+        return (num / 10) + (num % 10);
+    }
+
+    public static void main(String[] args) {
+        int maxSum = 0;
+        int numberWithMaxSum = 0;
+
+        // Loop through 2-digit numbers where first and last digits are same
+        for (int i = 11; i < 100; i += 11) { // 11, 22, ..., 99
+            int sum = digitSum(i);
+            if (sum > maxSum) {
+                maxSum = sum;
+                numberWithMaxSum = i;
+            }
+        }
+
+        // Output
+        System.out.println("Number with largest digit sum (first and last digits same): " + numberWithMaxSum);
+        System.out.println("Digit sum: " + maxSum);
+    }
+}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//Bricks
+class Solution {
+    public int solution(int[] A) {
+        int totalBricks = 0;
+        for (int bricks : A) {
+            totalBricks += bricks;
+        }
+        int N = A.length;
+        if (totalBricks != 10 * N) {
+            return -1;
+        }
+        
+        int moves = 0;
+        int currentExcess = 0;
+        for (int i = 0; i < N; i++) {
+            currentExcess += A[i] - 10;
+            moves += Math.abs(currentExcess);
+        }
+        
+        return moves;
+    }
+}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//S and T
+
+class Solution {
+    public int solution(String S, String T) {
+        if (S.equals(T)) {
+            return 0;
+        }
+        
+        int N = S.length();
+        int[] diff = new int[N];
+        for (int i = 0; i < N; i++) {
+            int sDigit = S.charAt(i) - '0';
+            int tDigit = T.charAt(i) - '0';
+            diff[i] = (tDigit - sDigit + 10) % 10;
+        }
+        
+        int moves = 0;
+        for (int i = 0; i < N - 1; i++) {
+            int currentDiff = diff[i];
+            if (currentDiff == 0) {
+                continue;
+            }
+            moves += currentDiff;
+            diff[i + 1] = (diff[i + 1] + currentDiff) % 10;
+        }
+        
+        if (diff[N - 1] != 0) {
+            return -1;
+        }
+        
+        return moves;
+    }
+}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
+//Players moves lrft , right  and Grpah
+public class Solution {
+    public int solution(String S) {
+        char[] players = S.toCharArray();
+        int n = players.length;
+        int count = 0;
+        
+        for (int i = 0; i < n; i++) {
+            boolean canMove = true;
+            char move = players[i];
+            
+            if (move == '>') {
+                if (i + 1 < n && players[i + 1] != ' ') {
+                    canMove = false;
+                }
+            } else if (move == '<') {
+                if (i - 1 >= 0 && players[i - 1] != ' ') {
+                    canMove = false;
+                }
+            } else if (move == '^' || move == 'v') {
+                // Assuming vertical moves are not blocked unless specified otherwise
+                // Since the problem focuses on horizontal moves, these might always succeed
+                canMove = true;
+            }
+            
+            if (canMove) {
+                count++;
+            }
+        }
+        
+        return count;
+    }
+}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//The conssuctive words
+
+public class Solution {
+    public int solution(String S) {
+        if (S.length() < 3) {
+            return 0;
+        }
+        
+        int totalMoves = 0;
+        int i = 0;
+        int n = S.length();
+        
+        while (i < n) {
+            char currentChar = S.charAt(i);
+            int j = i + 1;
+            while (j < n && S.charAt(j) == currentChar) {
+                j++;
+            }
+            int length = j - i;
+            if (length >= 3) {
+                totalMoves += length / 3;
+            }
+            i = j;
+        }
+        
+        return totalMoves;
+    }
+}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+

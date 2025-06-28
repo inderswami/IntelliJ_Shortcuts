@@ -469,6 +469,167 @@ class Solution {
 }
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+//Minimum move to adjust R with M
+import java.util.*;
+
+public class MinSwapsForR {
+    public static int minSwapsToGroupR(String s) {
+        List<Integer> rPositions = new ArrayList<>();
+        
+        // Step 1: Collect positions of all 'R'
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'R') {
+                rPositions.add(i);
+            }
+        }
+        
+        int rCount = rPositions.size();
+        if (rCount <= 1) return 0; // Nothing to swap if 0 or 1 'R'
+        
+        // Step 2: Group 'R's around the median position
+        int medianIndex = rCount / 2;
+        int medianPos = rPositions.get(medianIndex);
+        
+        int minSwaps = 0;
+        // Calculate swaps needed to bring all 'R's to contiguous positions
+        for (int i = 0; i < rCount; i++) {
+            // Ideal position in contiguous block centered at the median
+            int targetPos = medianPos - medianIndex + i;
+            minSwaps += Math.abs(rPositions.get(i) - targetPos);
+        }
+        
+        return minSwaps;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(minSwapsToGroupR("MRRM"));    // Output: 2
+        System.out.println(minSwapsToGroupR("RMRM"));    // Output: 2
+        System.out.println(minSwapsToGroupR("MMRMMRMM"));// Output: 4
+        System.out.println(minSwapsToGroupR("RRRR"));    // Output: 0
+        System.out.println(minSwapsToGroupR("MMM"));     // Output: 0
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//If N=14, take a sum of all digit=5. Then double this sum 10. Now final smallest element whose sum equal to 10 answer 19
+
+This mail has been sent from an external source. Do not reply to it, or open any links/attachments unless you are sure of the sender's identity.
+
+ 
+public class SmallestDigitSum {
+    public static int getSmallestNumber(int N) {
+        // Step 1: Sum the digits of N
+        int digitSum = 0;
+        int temp = N;
+        while (temp > 0) {
+            digitSum += temp % 10;
+            temp /= 10;
+        }
+        
+        // Step 2: Subtract 5 and then double the digit sum
+        int targetSum = (digitSum - 5) * 2;
+        
+        // Step 3: Find the smallest number whose digit sum equals targetSum
+        int result = 1;
+        while (true) {
+            int sum = 0;
+            int t = result;
+            while (t > 0) {
+                sum += t % 10;
+                t /= 10;
+            }
+            if (sum == targetSum) {
+                return result;
+            }
+            result++;
+        }
+    }
+
+    public static void main(String[] args) {
+        int n = 14;
+        int result = getSmallestNumber(n);
+        System.out.println("Result: " + result); // Output: 19
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//a for b or b for a without thre consecutive letters
+This mail has been sent from an external source. Do not reply to it, or open any links/attachments unless you are sure of the sender's identity.
+
+ 
+public class Main {
+    public static int getMinMoves(String s) {
+        if (s.length() < 3) return 0; // No moves needed for strings shorter than 3
+        
+        char[] chars = s.toCharArray();
+        int moves = 0;
+        
+        for (int i = 0; i <= chars.length - 3; i++) {
+            // Check for three consecutive same characters
+            if (chars[i] == chars[i+1] && chars[i] == chars[i+2]) {
+                // Replace the middle character (optimal strategy)
+                chars[i+1] = (chars[i] == 'a') ? 'b' : 'a';
+                moves++;
+                // Skip the next character as we've already handled it
+                i += 1;
+            }
+        }
+        
+        return moves;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getMinMoves("aaab"));    // Output: 1
+        System.out.println(getMinMoves("baaab"));   // Output: 1
+        System.out.println(getMinMoves("aaaaa"));   // Output: 2
+        System.out.println(getMinMoves("ababab"));  // Output: 0
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//finding the smallest number of moves required to make all elements in an array pairwise distinct, where each element is within the range [1, 3] and can be incremented by //1 in each m
+
+This mail has been sent from an external source. Do not reply to it, or open any links/attachments unless you are sure of the sender's identity.
+
+ 
+import java.util.Arrays;
+
+public class MinMovesForDistinctElements {
+    public static int solution(int[] A) {
+        Arrays.sort(A); // Sort the array to easily check adjacent elements
+        int moves = 0;
+        
+        for (int i = 1; i < A.length; i++) {
+            if (A[i] <= A[i-1]) {
+                // Calculate the required increment to make A[i] > A[i-1]
+                int required = A[i-1] + 1 - A[i];
+                moves += required;
+                A[i] += required;
+                
+                // Ensure the element doesn't exceed the maximum allowed value (3)
+                if (A[i] > 3) {
+                    return -1; // Impossible to make distinct within [1,3]
+                }
+            }
+        }
+        
+        return moves;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(solution(new int[]{1, 2, 2}));      // Output: 1 (change last 2 to 3)
+        System.out.println(solution(new int[]{1, 1, 2}));      // Output: 2 (change second 1 to 2, third to 3)
+        System.out.println(solution(new int[]{2, 2, 2}));      // Output: 3 (change to 2,3,4 but 4>3 → -1)
+        System.out.println(solution(new int[]{1, 2, 3}));      // Output: 0 (already distinct)
+        System.out.println(solution(new int[]{1, 1, 1, 1}));  // Output: -1 (impossible within [1,3])
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+
+
 
 
 

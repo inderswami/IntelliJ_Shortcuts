@@ -1,4 +1,4 @@
-//String rotation checker
+//String rotation checker.
 public class StringRotationChecker {
     
     // Function to rotate string left by one position

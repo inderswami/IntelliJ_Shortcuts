@@ -1,11 +1,1 @@
-Ctrl+Alt+L: To Reformat code or to remove unnecessary space.
-Ctrl+[: To Navigate to the start of the bracket.
-Ctrl+]: To Navigate to the end of the bracket.
-F2: To Navigate to Errors.
-Alt+Enter: To evaluate the quick fixes available for the Errors.
-Ctrl+Spacebar: To check for Implementation suggestions.
-Ctrl+B: To jump into Method.
-Shift(double tab): To search Entire project.
-Ctrl+N: To search in the class.
-Ctrl+Shift+F: To search into the entire project.
-Ctrl+Shift+R: to replace the new code with existing code.
+Codility

@@ -294,4 +294,90 @@ public class Solution {
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+//Replace 5 k times
+ 
+public class Solution {
+    public String solution(String S, int K) {
+        if (S == null || S.length() == 0) return "IMPOSSIBLE";
 
+        char[] chars = S.toCharArray();
+        int n = chars.length;
+
+        // Count digits not equal to 5
+        int notFiveCount = 0;
+        for (char c : chars) {
+            if (c != '5') notFiveCount++;
+        }
+
+        // If we cannot make exactly K changes
+        if (K > notFiveCount) return "IMPOSSIBLE";
+
+        // Make changes greedily from left to right for max value
+        for (int i = 0; i < n && K > 0; i++) {
+            if (chars[i] != '5') {
+                chars[i] = '5';
+                K--;
+            }
+        }
+
+        return new String(chars);
+    }
+
+    // Example main method to run tests
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.solution("165232", 3)); // Expected: 565552
+        System.out.println(sol.solution("123", 2));     // Expected: 553
+        System.out.println(sol.solution("555", 0));     // Expected: 555
+        System.out.println(sol.solution("555", 1));     // Expected: IMPOSSIBLE
+        System.out.println(sol.solution("", 0));        // Expected: IMPOSSIBLE
+    }
+}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//Given two arrays A and B consisting of N integers each. Index k is named fair if four sums A[0]+.......
+This mail has been sent from an external source. Do not reply to it, or open any links/attachments unless you are sure of the sender's identity.
+
+ 
+public class Solution {
+    public int solution(int[] A, int[] B) {
+        int N = A.length;
+        if (N != B.length || N < 2) return 0;
+
+        long totalSumA = 0, totalSumB = 0;
+        for (int i = 0; i < N; i++) {
+            totalSumA += A[i];
+            totalSumB += B[i];
+        }
+
+        int fairCount = 0;
+        long leftSumA = 0, leftSumB = 0;
+
+        for (int K = 1; K < N; K++) {
+            leftSumA += A[K - 1];
+            leftSumB += B[K - 1];
+
+            long rightSumA = totalSumA - leftSumA;
+            long rightSumB = totalSumB - leftSumB;
+
+            if (leftSumA == rightSumA && leftSumB == rightSumB && leftSumA == leftSumB) {
+                fairCount++;
+            }
+        }
+
+        return fairCount;
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        System.out.println(sol.solution(new int[]{0, 4, -1, 0, 3}, new int[]{0, -2, 5, 0, 3})); // 2
+        System.out.println(sol.solution(new int[]{2, -2, -3, 3}, new int[]{0, 0, 4, -4}));     // 1
+        System.out.println(sol.solution(new int[]{4, -1, 0, 3}, new int[]{-2, 6, 0, 4}));       // 0
+        System.out.println(sol.solution(new int[]{3, 2, 6}, new int[]{4, 1, 6}));              // 0
+        System.out.println(sol.solution(new int[]{1, 4, 2, -2, 5}, new int[]{7, -2, -2, 2, 5}));// 2
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

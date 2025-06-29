@@ -267,11 +267,11 @@ public class Solution {
         char[] players = S.toCharArray();
         int n = players.length;
         int count = 0;
-        
+
         for (int i = 0; i < n; i++) {
             boolean canMove = true;
             char move = players[i];
-            
+
             if (move == '>') {
                 if (i + 1 < n && players[i + 1] != ' ') {
                     canMove = false;
@@ -281,17 +281,28 @@ public class Solution {
                     canMove = false;
                 }
             } else if (move == '^' || move == 'v') {
-                // Assuming vertical moves are not blocked unless specified otherwise
-                // Since the problem focuses on horizontal moves, these might always succeed
+                // Assuming vertical moves are always possible
                 canMove = true;
             }
-            
+
             if (canMove) {
                 count++;
             }
         }
-        
+
         return count;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        System.out.println(sol.solution("> <"));      // Expected: true (2)
+        System.out.println(sol.solution(">X<"));      // Expected: false (0)
+        System.out.println(sol.solution("^v"));       // Expected: true (2)
+        System.out.println(sol.solution(">v<^"));     // Mixed case
+
+        // Additional test cases (just change or add strings as needed)
+        System.out.println(sol.solution(">> "));      // Only one can move
     }
 }
 

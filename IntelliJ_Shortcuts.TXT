@@ -624,6 +624,28 @@ public class MinMovesForDistinctElements {
     }
 }
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//S=(A...AB...B) by deleting some elements S=BAABAB)-> 2, BBABAA->3 (delete)
+public int Soltion(string S){
+Int n=S.length();
+if(n<=1){return 0}
+int minDeletions=n;
+for(int i=0;i<=n;i++){
+int deletion=0;
+String SubA=S.Substring(0,i);
+String SubB=S.Substring(i,n);
+for(int j=0;J<SubA.length();J++){
+if(SubA.charAT(J)=='B'){
+deletions++;
+}
+}
+for(int J=0;J<SubB.length();J++){
+if(SubB.charAT(j)=='A'){
+deletions++;}}
+minDeletions=Math.min(minDeletions,deletions);
+return minDeletions;
+}}}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//In One move you can increase or decarese vlaue of Any element by 1.after Each move all no should remain in range (1....N)   (1,2,3)----0, (1,2,1)->2
 
 
 

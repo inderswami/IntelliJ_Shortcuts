@@ -561,23 +561,24 @@ public class MinSwapsForR {
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //If N=14, take a sum of all digit=5. Then double this sum 10. Now final smallest element whose sum equal to 10 answer 19
 
-This mail has been sent from an external source. Do not reply to it, or open any links/attachments unless you are sure of the sender's identity.
 
- 
+
+
 public class SmallestDigitSum {
+
     public static int getSmallestNumber(int N) {
-        // Step 1: Sum the digits of N
+        // Step 1: Compute digit sum of N
         int digitSum = 0;
         int temp = N;
         while (temp > 0) {
             digitSum += temp % 10;
             temp /= 10;
         }
-        
-        // Step 2: Subtract 5 and then double the digit sum
-        int targetSum = (digitSum - 5) * 2;
-        
-        // Step 3: Find the smallest number whose digit sum equals targetSum
+
+        // Step 2: Add 5 to digit sum to get target
+        int targetSum = digitSum + 5;
+
+        // Step 3: Find the smallest number with that digit sum
         int result = 1;
         while (true) {
             int sum = 0;
@@ -586,9 +587,11 @@ public class SmallestDigitSum {
                 sum += t % 10;
                 t /= 10;
             }
+
             if (sum == targetSum) {
                 return result;
             }
+
             result++;
         }
     }
@@ -596,9 +599,10 @@ public class SmallestDigitSum {
     public static void main(String[] args) {
         int n = 14;
         int result = getSmallestNumber(n);
-        System.out.println("Result: " + result); // Output: 19
+        System.out.println("Result: " + result); // Expected: 19
     }
 }
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 //a for b or b for a without thre consecutive letters

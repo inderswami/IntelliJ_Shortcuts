@@ -210,22 +210,21 @@ class Solution {
 }
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//S and T
+This mail has been sent from an external source. Do not reply to it, or open any links/attachments unless you are sure of the sender's identity.
 
+ 
 class Solution {
-    public int solution(String S, String T) {
-        if (S.equals(T)) {
+    public int solution(String s, String T) {
+        if (s.equals(T)) {
             return 0;
         }
-        
-        int N = S.length();
+        int N = s.length();
         int[] diff = new int[N];
         for (int i = 0; i < N; i++) {
-            int sDigit = S.charAt(i) - '0';
+            int sDigit = s.charAt(i) - '0';
             int tDigit = T.charAt(i) - '0';
             diff[i] = (tDigit - sDigit + 10) % 10;
         }
-        
         int moves = 0;
         for (int i = 0; i < N - 1; i++) {
             int currentDiff = diff[i];
@@ -235,12 +234,29 @@ class Solution {
             moves += currentDiff;
             diff[i + 1] = (diff[i + 1] + currentDiff) % 10;
         }
-        
         if (diff[N - 1] != 0) {
             return -1;
         }
-        
         return moves;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        // Test case 1: Identical strings
+        System.out.println("Test 1: " + sol.solution("123", "123")); // Expected: 0
+        
+        // Test case 2: Simple rotation
+        System.out.println("Test 2: " + sol.solution("111", "222")); // Expected: 1
+        
+        // Test case 3: Complex rotation
+        System.out.println("Test 3: " + sol.solution("1234", "2345")); // Expected: 1
+        
+        // Test case 4: Invalid case (last digit doesn't match after rotations)
+        System.out.println("Test 4: " + sol.solution("123", "124")); // Expected: -1
+        
+        // Test case 5: Multiple rotations needed
+        System.out.println("Test 5: " + sol.solution("0000", "9999")); // Expected: 9
     }
 }
 

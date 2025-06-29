@@ -719,23 +719,23 @@ System.out.println(Sol.solution(new int[]{5,4,3,2,1}));
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //Next Digit Sum intput->28 out->137 input->734 output->743 input->1990 output->2089
 private static int digitSum(int number){
-int Sum=0;
-while(number>0){
-Sum+=number%10;
-number/=10; }
-return sum;}
+    int Sum=0;
+    while(number>0){
+        Sum+=number%10;
+        number/=10; }
+    return Sum;}
 public static int nextdigitnumberwithsamedigitsum(int N){
-int targetsum=digitSum(N);
-int M=N+1;
-while(digitSum(M)!=targetSum){
-M++;}
-return M;}
+    int targetSum=digitSum(N);
+    int M=N+1;
+    while(digitSum(M)!=targetSum){
+        M++;}
+    return M;}
 public static void main(String [] args){
-System.out.println(nextdigitnumberwithsamedigitsum(N:28));
-System.out.println(nextdigitnumberwithsamedigitsum(N:734));
-System.out.println(nextdigitnumberwithsamedigitsum(N:1990));
-System.out.println(nextdigitnumberwithsamedigitsum(N:1000));
-}}
+    System.out.println(nextdigitnumberwithsamedigitsum(28));
+    System.out.println(nextdigitnumberwithsamedigitsum(734));
+    System.out.println(nextdigitnumberwithsamedigitsum(1990));
+    System.out.println(nextdigitnumberwithsamedigitsum(1000));
+}
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //First and LAst digit same->Add.....130,191,200,10->140    405,45,300,300->600   30,909,3190,99,3990,9009->9918
 

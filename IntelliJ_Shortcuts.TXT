@@ -388,10 +388,7 @@ public class Solution {
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-//Given two arrays A and B consisting of N integers each. Index k is named fair if four sums A[0]+.......
-This mail has been sent from an external source. Do not reply to it, or open any links/attachments unless you are sure of the sender's identity.
-
- 
+//Given two arrays A and B consisting of N integers each. Index k is named fair if four sums A[0]+....... 
 public class Solution {
     public int solution(int[] A, int[] B) {
         int N = A.length;

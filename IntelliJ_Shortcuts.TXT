@@ -262,30 +262,30 @@ class Solution {
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
 //Players moves lrft , right  and Grpah
+
+
 public class Solution {
     public int solution(String S) {
-        char[] players = S.toCharArray();
-        int n = players.length;
+        int n = S.length();
+        boolean[] occupied = new boolean[n];  // Tracks occupied fields
         int count = 0;
 
         for (int i = 0; i < n; i++) {
-            boolean canMove = true;
-            char move = players[i];
+            char move = S.charAt(i);
+            int target = -1;
 
+            // Determine target based on move direction
             if (move == '>') {
-                if (i + 1 < n && players[i + 1] != ' ') {
-                    canMove = false;
-                }
+                if (i + 1 < n) target = i + 1;
             } else if (move == '<') {
-                if (i - 1 >= 0 && players[i - 1] != ' ') {
-                    canMove = false;
-                }
+                if (i - 1 >= 0) target = i - 1;
             } else if (move == '^' || move == 'v') {
-                // Assuming vertical moves are always possible
-                canMove = true;
+                target = i;
             }
 
-            if (canMove) {
+            // Check if move is valid and target is unoccupied
+            if (target != -1 && !occupied[target]) {
+                occupied[target] = true;  // Mark target as occupied
                 count++;
             }
         }
@@ -296,15 +296,20 @@ public class Solution {
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        System.out.println(sol.solution("> <"));      // Expected: true (2)
-        System.out.println(sol.solution(">X<"));      // Expected: false (0)
-        System.out.println(sol.solution("^v"));       // Expected: true (2)
-        System.out.println(sol.solution(">v<^"));     // Mixed case
+        // Codility sample test cases:
+        System.out.println(sol.solution("><^^"));         // Expected: 2
+        System.out.println(sol.solution("<<^<^v>>"));     // Expected: 6
+        System.out.println(sol.solution("><><"));         // Expected: 0
 
-        // Additional test cases (just change or add strings as needed)
-        System.out.println(sol.solution(">> "));      // Only one can move
+        // Edge cases
+        System.out.println(sol.solution("^"));            // Expected: 1
+        System.out.println(sol.solution(">>>>>>>"));      // Expected: depends on space, likely 6
+        System.out.println(sol.solution("<<<<<<<<<"));    // Expected: 0
+        System.out.println(sol.solution("^^^^^^^^^^"));   // Expected: 1 (only first player succeeds)
+        System.out.println(sol.solution(""));             // Expected: 0
     }
 }
+
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //The conssuctive words

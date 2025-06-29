@@ -739,37 +739,60 @@ System.out.println(nextdigitnumberwithsamedigitsum(N:1000));
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //First and LAst digit same->Add.....130,191,200,10->140    405,45,300,300->600   30,909,3190,99,3990,9009->9918
 
-public static int maxSum(int () A){
-Map<String int[]> map=new HAshMap<>();
-int result=-1;
-for(*int num:A){int first=getFiristDigit(num);
-int last=num%10;
-String Key=first+"-"+last;
-int[] topTwo=Map.getorDefault(Key,new int[]{-1,-1});
-if(num>topTwo[0]) {
-topTwo[1]=topTwo[0];
-topTwo[0]=num;}
-else if(num>topTwo[1]){
-topTwo[1]=num;
+//This mail has been sent from an external source. Do not reply to it, or open any links/attachments unless you are sure of the sender's identity.
+
+
+        import java.util.*;
+
+class Main {
+
+    public static int maxSum(int[] A) {
+        Map<String, int[]> map = new HashMap<>();
+        int result = -1;
+
+        for (int num : A) {
+            int first = getFirstDigit(num);
+            int last = num % 10;
+            String key = first + "-" + last;
+
+            int[] topTwo = map.getOrDefault(key, new int[]{-1, -1});
+            if (num > topTwo[0]) {
+                topTwo[1] = topTwo[0];
+                topTwo[0] = num;
+            } else if (num > topTwo[1]) {
+                topTwo[1] = num;
+            }
+
+            map.put(key, topTwo);
+        }
+
+        for (int[] topTwo : map.values()) {
+            if (topTwo[1] != -1) {
+                result = Math.max(result, topTwo[0] + topTwo[1]);
+            }
+        }
+
+        return result;
+    }
+
+    private static int getFirstDigit(int num) {
+        while (num >= 10) {
+            num /= 10;
+        }
+        return num;
+    }
+
+    public static void main(String[] args) {
+        int[] A1 = {130, 191, 200, 10};
+        int[] A2 = {405, 45, 300, 300, 150};
+        int[] A3 = {5, 20, 32, 2, 525};
+        int[] A4 = {30, 999, 3190, 99, 3990, 9089, 9918};
+
+        System.out.println(maxSum(A1)); // 140
+        System.out.println(maxSum(A2)); // 600
+        System.out.println(maxSum(A3)); // -1 (no pair with same first and last digit)
+        System.out.println(maxSum(A4)); // 9918
+    }
 }
-
-Map.put(Key,topTwo);}
-for(int[] topTwo:Map.Values()){
-if(topTwo[1]!=-1){
-result=Math.Max(result,topTwo[0]+topTwo[1])}}
-return result;}
-private static int getFiristDigit(int num){
-while(num>=10){num/=10;}
-return num;}
-public static vouid main(String [] args){
-
-int []A1={130,191,200,10};
-int []A2={450,45,300,300};
-int []A3={50,222,49,52,25};
-int []A4={30,909,3190,99,3910,900};
-System.out.println(A1);
-System.out.println(A2);
-System.out.println(A3);
-System.out.println(A4);
-
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

@@ -688,5 +688,39 @@ System.out.println(nextdigitnumberwithsamedigitsum(N:1990));
 System.out.println(nextdigitnumberwithsamedigitsum(N:1000));
 }}
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//First and LAst digit same->Add.....130,191,200,10->140    405,45,300,300->600   30,909,3190,99,3990,9009->9918
+
+public static int maxSum(int () A){
+Map<String int[]> map=new HAshMap<>();
+int result=-1;
+for(*int num:A){int first=getFiristDigit(num);
+int last=num%10;
+String Key=first+"-"+last;
+int[] topTwo=Map.getorDefault(Key,new int[]{-1,-1});
+if(num>topTwo[0]) {
+topTwo[1]=topTwo[0];
+topTwo[0]=num;}
+else if(num>topTwo[1]){
+topTwo[1]=num;
+}
+
+Map.put(Key,topTwo);}
+for(int[] topTwo:Map.Values()){
+if(topTwo[1]!=-1){
+result=Math.Max(result,topTwo[0]+topTwo[1])}}
+return result;}
+private static int getFiristDigit(int num){
+while(num>=10){num/=10;}
+return num;}
+public static vouid main(String [] args){
+
+int []A1={130,191,200,10};
+int []A2={450,45,300,300};
+int []A3={50,222,49,52,25};
+int []A4={30,909,3190,99,3910,900};
+System.out.println(A1);
+System.out.println(A2);
+System.out.println(A3);
+System.out.println(A4);
 
 

@@ -168,7 +168,9 @@ public class LargestDigitSumSameEnds {
 }
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+This mail has been sent from an external source. Do not reply to it, or open any links/attachments unless you are sure of the sender's identity.
 
+ 
 //Bricks
 class Solution {
     public int solution(int[] A) {
@@ -180,15 +182,33 @@ class Solution {
         if (totalBricks != 10 * N) {
             return -1;
         }
-        
         int moves = 0;
         int currentExcess = 0;
         for (int i = 0; i < N; i++) {
             currentExcess += A[i] - 10;
             moves += Math.abs(currentExcess);
         }
-        
         return moves;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        // Test case 1: Example where no moves are needed
+        int[] test1 = {10, 10, 10};
+        System.out.println("Test 1: " + sol.solution(test1)); // Expected: 0
+        
+        // Test case 2: Example where moves are needed
+        int[] test2 = {11, 10, 9};
+        System.out.println("Test 2: " + sol.solution(test2)); // Expected: 2
+        
+        // Test case 3: Invalid case (total bricks not equal to 10*N)
+        int[] test3 = {10, 11, 12};
+        System.out.println("Test 3: " + sol.solution(test3)); // Expected: -1
+        
+        // Test case 4: More complex case
+        int[] test4 = {7, 15, 10, 8};
+        System.out.println("Test 4: " + sol.solution(test4)); // Expected: 7
     }
 }
 

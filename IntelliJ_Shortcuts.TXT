@@ -487,19 +487,23 @@ public class Solution {
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 //Non negative no v in a binary form
-class Solution {
+//This mail has been sent from an external source. Do not reply to it, or open any links/attachments unless you are sure of the sender's identity.
+
+
+public class Solution {
+
     public int solution(String S) {
         if (S == null || S.isEmpty()) return 0;
-        
+
         // Find the first '1' to ignore leading zeros
         int firstOne = 0;
         while (firstOne < S.length() && S.charAt(firstOne) == '0') {
             firstOne++;
         }
-        
+
         // If all zeros, return 0
         if (firstOne == S.length()) return 0;
-        
+
         int operations = 0;
         // For each bit after firstOne
         for (int i = S.length() - 1; i > firstOne; i--) {
@@ -509,13 +513,26 @@ class Solution {
                 operations += 1; // just the shift
             }
         }
-        
-        // The first '1' contributes 1 operation plus all the shifts to reach it
+
+        // The first '1' contributes 1 operation
         operations += 1;
-        
+
         return operations;
     }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        // Test cases
+        System.out.println(sol.solution("1101"));   // Output: 6 (13 in binary)
+        System.out.println(sol.solution("10"));     // Output: 2 (2 in binary)
+        System.out.println(sol.solution("1"));      // Output: 1 (1 in binary)
+        System.out.println(sol.solution("0"));      // Output: 0 (0 in binary)
+        System.out.println(sol.solution("111"));    // Output: 5 (7 in binary)
+        System.out.println(sol.solution("1000"));   // Output: 4 (8 in binary)
+    }
 }
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 //Minimum move to adjust R with M

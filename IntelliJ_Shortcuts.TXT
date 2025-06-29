@@ -322,6 +322,25 @@ public class Solution {
         }
         
         return totalMoves;
+   public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        // Test case 1: Identical strings
+        System.out.println("Test 1: " + sol.solution("abba")); // 
+        
+        // Test case 2: Simple rotation
+        System.out.println("Test 2: " + sol.solution("abbabab")); // 
+        
+        // Test case 3: Complex rotation
+        System.out.println("Test 3: " + sol.solution("bbbaaaa")); // 
+        
+        // Test case 4: Invalid case (last digit doesn't match after rotations)
+        System.out.println("Test 4: " + sol.solution("aaaaaaaab")); // 
+        
+        // Test case 5: Multiple rotations needed
+        System.out.println("Test 5: " + sol.solution("bbbbbbbbb")); // 
+    }
+
     }
 }
 

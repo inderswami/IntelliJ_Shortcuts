@@ -647,12 +647,46 @@ return minDeletions;
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //In One move you can increase or decarese vlaue of Any element by 1.after Each move all no should remain in range (1....N)   (1,2,3)----0, (1,2,1)->2
 
+public int solution(int [] A){
+int n=A.length;
+Arrays.sort(A);
+long moves=0;
+for(int i=0;i<n;i++){
+int target=i+1;
+moves+=Math.abs(A[i]-target);
+if(moves>1_000_000_000){
+return-1;}
+retrun(int) moves;}
+public static void main(String[] args){
+solution Sol=new Solution();
+System.out.println(Sol.solution(new int[]{1,2,1}));
+System.out.println(Sol.solution(new int[]{2,1,4,4}));
+System.out.println(Sol.solution(new int[]{6,2,3,5,6,3}));
+System.out.println(Sol.solution(new int[]{1,1,1,1,1,1}));
+System.out.println(Sol.solution(new int[]{5,4,3,2,1}));
+}
+}
 
-
-
-
-
-
-
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//Next Digit Sum intput->28 out->137 input->734 output->743 input->1990 output->2089
+private static int digitSum(int number){
+int Sum=0;
+while(number>0){
+Sum+=number%10;
+number/=10; }
+return sum;}
+public static int nextdigitnumberwithsamedigitsum(int N){
+int targetsum=digitSum(N);
+int M=N+1;
+while(digitSum(M)!=targetSum){
+M++;}
+return M;}
+public static void main(String [] args){
+System.out.println(nextdigitnumberwithsamedigitsum(N:28));
+System.out.println(nextdigitnumberwithsamedigitsum(N:734));
+System.out.println(nextdigitnumberwithsamedigitsum(N:1990));
+System.out.println(nextdigitnumberwithsamedigitsum(N:1000));
+}}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
